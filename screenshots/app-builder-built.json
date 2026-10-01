@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "देव ड्राई क्लीनर्स समस्तीपुर | ड्राई क्लीन, लॉन्ड्री और कपड़े धुलाई",
+      "hasCanvas": false,
+      "bodyTextLen": 5372,
+      "bodyTextHash": "60db4292063029414d87935564d29528fe999424aad12c1c73319778deafc885",
+      "bodyTextPrefix": "देव बंगाली टोला, समस्तीपुर सेवाएँ कैसे काम करता है बंगाली टोला, ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "देव ड्राई क्लीनर्स समस्तीपुर | ड्राई क्लीन, लॉन्ड्री और कपड़े धुलाई",
+      "hasCanvas": false,
+      "bodyTextLen": 5293,
+      "bodyTextHash": "0a45df6b378a7856106a7b8ceee084209f3a701c3c730d4218aa89bd3cb6dbdc",
+      "bodyTextPrefix": "देव हिं EN राम कुमार बैठा जी · बंगाली टोला, समस्तीपुर आपकी साड़ि",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}

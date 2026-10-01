@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-linen: #f4ede4;
+  --color-ivory: #fff9f3;
+  --color-ink: #2c221c;
+  --color-muted: #7c6f66;
+  --color-subtle: #a39890;
+  --color-rose: #a45c62;
+  --color-rose-fg: #fff9f3;
+  --color-border: #e6d9ce;
+  --color-soft: #f0e0dc;
+  --color-ring: #a45c62;
+  --color-whatsapp: #2f6a4a;
+  --color-whatsapp-fg: #fff9f3;
+
+  --font-sans: "Hind", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Tiro Devanagari Hindi", "Cormorant Garamond", ui-serif, Georgia, serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+}
+
+@layer base {
+  :root {
+    --motion-quick: 150ms;
+    --motion-fast: 250ms;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-linen);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

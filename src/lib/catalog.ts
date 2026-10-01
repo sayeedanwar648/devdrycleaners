@@ -1,0 +1,416 @@
+export const SHOP = {
+  phoneRaw: "8298874800",
+  phoneDisplay: "82988 74800",
+  whatsappE164: "918298874800",
+  areaHi: "बंगाली टोला",
+  areaEn: "Bengali Tola",
+  cityHi: "समस्तीपुर",
+  cityEn: "Samastipur",
+  hoursHi: "सुबह 9 बजे – रात 8 बजे",
+  hoursEn: "9 am – 8 pm",
+  mapsUrl: "https://share.google/0BWqN57h2qVCdt9tB",
+  lat: 25.8597792,
+  lng: 85.7882859,
+  mapsQuery: "Dev DryCleaners, Bengali Tola, Samastipur",
+  founderHi: "राम कुमार बैठा जी",
+  founderEn: "Ram Kumar Baitha Ji",
+};
+
+export const ICON_IDS = [
+  "shirt",
+  "saree",
+  "lehenga",
+  "dupatta",
+  "suit",
+  "pant",
+  "blanket",
+  "curtain",
+  "sofa",
+  "iron",
+] as const;
+
+export type IconId = (typeof ICON_IDS)[number];
+
+export const ICON_LABELS: Record<IconId, { hi: string; en: string }> = {
+  shirt: { hi: "कमीज़", en: "Shirt" },
+  saree: { hi: "साड़ी", en: "Saree" },
+  lehenga: { hi: "लहंगा", en: "Lehenga" },
+  dupatta: { hi: "दुपट्टा", en: "Dupatta" },
+  suit: { hi: "सूट", en: "Suit" },
+  pant: { hi: "पैंट", en: "Trousers" },
+  blanket: { hi: "कंबल", en: "Blanket" },
+  curtain: { hi: "पर्दा", en: "Curtain" },
+  sofa: { hi: "सोफा", en: "Sofa" },
+  iron: { hi: "स्टीम प्रेस", en: "Steam press" },
+};
+
+export function isIconId(value: string): value is IconId {
+  return (ICON_IDS as readonly string[]).includes(value);
+}
+
+export type CatalogCategory = {
+  id: string;
+  nameHi: string;
+  nameEn: string;
+  sortOrder: number;
+};
+
+export type CatalogSubcategory = {
+  id: string;
+  categoryId: string;
+  nameHi: string;
+  nameEn: string;
+  sortOrder: number;
+};
+
+export type CatalogItem = {
+  id: string;
+  nameHi: string;
+  nameEn: string;
+  category: string;
+  subcategory: string;
+  price: number;
+  days: number;
+  icon: IconId;
+  image: string;
+  pieces: number;
+  featured: boolean;
+  active: boolean;
+  sortOrder: number;
+  regNo: number;
+};
+
+export function itemName(item: Pick<CatalogItem, "nameHi" | "nameEn">, lang: "hi" | "en") {
+  return lang === "hi" ? item.nameHi : item.nameEn;
+}
+
+export function categoryName(
+  cat: Pick<CatalogCategory, "nameHi" | "nameEn">,
+  lang: "hi" | "en",
+) {
+  return lang === "hi" ? cat.nameHi : cat.nameEn;
+}
+
+export function subcategoryName(
+  sub: Pick<CatalogSubcategory, "nameHi" | "nameEn">,
+  lang: "hi" | "en",
+) {
+  return lang === "hi" ? sub.nameHi : sub.nameEn;
+}
+
+export const SEED_VERSION = "register-v12";
+
+export const SEED_CATEGORIES: CatalogCategory[] = [
+  { id: "dry-gents", nameHi: "जेंट्स", nameEn: "Gents", sortOrder: 10 },
+  { id: "dry-ladies", nameHi: "लेडीज", nameEn: "Ladies", sortOrder: 20 },
+  { id: "winter", nameHi: "गर्म कपड़े", nameEn: "Winter", sortOrder: 30 },
+  { id: "oil-wash", nameHi: "ऑयल वॉश", nameEn: "Oil wash", sortOrder: 40 },
+  { id: "other", nameHi: "घर और बैग", nameEn: "Home & bags", sortOrder: 50 },
+  { id: "kids", nameHi: "बच्चे", nameEn: "Kids", sortOrder: 60 },
+  { id: "steam-press", nameHi: "स्टीम प्रेस", nameEn: "Steam press", sortOrder: 70 },
+];
+
+export const SEED_SUBCATEGORIES: CatalogSubcategory[] = [
+  { id: "sub-g-suit", categoryId: "dry-gents", nameHi: "सूट / कोट", nameEn: "Suits / coats", sortOrder: 10 },
+  { id: "sub-g-kurta", categoryId: "dry-gents", nameHi: "कुर्ता-पायजामा", nameEn: "Kurta-pyjama", sortOrder: 20 },
+  { id: "sub-g-pant", categoryId: "dry-gents", nameHi: "पैंट-शर्ट", nameEn: "Pants & shirts", sortOrder: 30 },
+  { id: "sub-g-wedding", categoryId: "dry-gents", nameHi: "शादी", nameEn: "Wedding", sortOrder: 40 },
+
+  { id: "sub-l-saree", categoryId: "dry-ladies", nameHi: "साड़ी", nameEn: "Saree", sortOrder: 10 },
+  { id: "sub-l-blouse", categoryId: "dry-ladies", nameHi: "ब्लाउज", nameEn: "Blouse", sortOrder: 20 },
+  { id: "sub-l-suit", categoryId: "dry-ladies", nameHi: "सूट", nameEn: "Suit", sortOrder: 30 },
+  { id: "sub-l-lehenga", categoryId: "dry-ladies", nameHi: "लहंगा-गाउन", nameEn: "Lehenga-gown", sortOrder: 40 },
+  { id: "sub-l-frock", categoryId: "dry-ladies", nameHi: "स्कर्ट-फ्रॉक", nameEn: "Skirt-frock", sortOrder: 50 },
+  { id: "sub-l-dupatta", categoryId: "dry-ladies", nameHi: "दोपट्टा", nameEn: "Dupatta", sortOrder: 60 },
+
+  { id: "sub-w-jacket", categoryId: "winter", nameHi: "जैकेट", nameEn: "Jacket", sortOrder: 10 },
+  { id: "sub-w-sweater", categoryId: "winter", nameHi: "स्वेटर-हुडी", nameEn: "Sweater-hoodie", sortOrder: 20 },
+  { id: "sub-w-shawl", categoryId: "winter", nameHi: "शॉल", nameEn: "Shawl", sortOrder: 30 },
+  { id: "sub-w-blanket", categoryId: "winter", nameHi: "कंबल-रजाई", nameEn: "Blanket-quilt", sortOrder: 40 },
+  { id: "sub-w-curtain", categoryId: "winter", nameHi: "पर्दा", nameEn: "Curtain", sortOrder: 50 },
+
+  { id: "sub-o-men", categoryId: "oil-wash", nameHi: "पुरुष", nameEn: "Men", sortOrder: 10 },
+  { id: "sub-o-women", categoryId: "oil-wash", nameHi: "महिला", nameEn: "Women", sortOrder: 20 },
+  { id: "sub-o-wedding", categoryId: "oil-wash", nameHi: "शादी", nameEn: "Wedding", sortOrder: 30 },
+
+  { id: "sub-x-case", categoryId: "other", nameHi: "सूटकेस", nameEn: "Suitcase", sortOrder: 10 },
+  { id: "sub-x-bag", categoryId: "other", nameHi: "बैग", nameEn: "Bags", sortOrder: 20 },
+  { id: "sub-x-bed", categoryId: "other", nameHi: "बिस्तर", nameEn: "Bedding", sortOrder: 30 },
+  { id: "sub-x-towel", categoryId: "other", nameHi: "तौलिया", nameEn: "Towel", sortOrder: 40 },
+  { id: "sub-x-curtain", categoryId: "other", nameHi: "पर्दा", nameEn: "Curtain", sortOrder: 50 },
+
+  { id: "sub-k-daily", categoryId: "kids", nameHi: "रोज़मर्रा", nameEn: "Everyday", sortOrder: 10 },
+  { id: "sub-k-party", categoryId: "kids", nameHi: "पार्टी", nameEn: "Party", sortOrder: 20 },
+  { id: "sub-k-winter", categoryId: "kids", nameHi: "सर्दी", nameEn: "Winter", sortOrder: 30 },
+];
+
+type SeedIn = {
+  id: string;
+  category: string;
+  sub?: string;
+  no: number;
+  nameHi: string;
+  nameEn: string;
+  price: number;
+  icon: IconId;
+  image: string;
+  pieces?: number;
+  days?: number;
+  featured?: boolean;
+};
+
+function buildItems(rows: SeedIn[]): CatalogItem[] {
+  return rows.map((row, index) => ({
+    id: row.id,
+    category: row.category,
+    subcategory: row.sub ?? "",
+    nameHi: row.nameHi,
+    nameEn: row.nameEn,
+    price: row.price,
+    icon: row.icon,
+    image: row.image,
+    pieces: row.pieces ?? 1,
+    days: row.days ?? 2,
+    featured: row.featured ?? false,
+    active: true,
+    sortOrder: (index + 1) * 10,
+    regNo: row.no,
+  }));
+}
+
+const img = {
+  suit: "/catalog/suit.jpg",
+  suitTie: "/catalog/suit-tie.jpg",
+  blazer: "/catalog/blazer.jpg",
+  overcoat: "/catalog/overcoat.jpg",
+  bandi: "/catalog/bandi.jpg",
+  kurta: "/catalog/kurta.jpg",
+  kurtaSilk: "/catalog/kurta-silk.jpg",
+  kurtaWork: "/catalog/kurta-work.jpg",
+  pajama: "/catalog/pajama.jpg",
+  trousers: "/catalog/trousers.jpg",
+  jeans: "/catalog/jeans.jpg",
+  shirt: "/catalog/shirt.jpg",
+  sherwani: "/catalog/sherwani.jpg",
+  safari: "/catalog/safari.jpg",
+  sareeCotton: "/catalog/saree-cotton.jpg",
+  sareeBanarasi: "/catalog/saree-banarasi.jpg",
+  sareeSilk: "/catalog/saree-silk.jpg",
+  sareeChiffon: "/catalog/saree-chiffon.jpg",
+  sareeNet: "/catalog/saree-net.jpg",
+  sareeWork: "/catalog/saree-work.jpg",
+  blouse: "/catalog/blouse.jpg",
+  blouseWork: "/catalog/blouse-work.jpg",
+  salwar: "/catalog/salwar.jpg",
+  salwarWork: "/catalog/salwar-work.jpg",
+  skirt: "/catalog/skirt.jpg",
+  skirtWork: "/catalog/skirt-work.jpg",
+  lehenga: "/catalog/lehenga.jpg",
+  lehengaWork: "/catalog/lehenga-work.jpg",
+  bridal: "/catalog/lehenga-bridal.jpg",
+  bridalHeavy: "/catalog/bridal-heavy.jpg",
+  frock: "/catalog/frock.jpg",
+  frockWork: "/catalog/frock-work.jpg",
+  dupatta: "/catalog/dupatta.jpg",
+  dupattaWork: "/catalog/dupatta-work.jpg",
+  gown: "/catalog/frock-work.jpg",
+  jacket: "/catalog/jacket.jpg",
+  halfJacket: "/catalog/denim-jacket.jpg",
+  denimShirt: "/catalog/denim-shirt.jpg",
+  jeansJacket: "/catalog/jeans-jacket.jpg",
+  jacketCap: "/catalog/jacket-cap.jpg",
+  leather: "/catalog/leather.jpg",
+  sweater: "/catalog/sweater.jpg",
+  shawl: "/catalog/shawl.jpg",
+  shawlKashmir: "/catalog/shawl-kashmir.jpg",
+  muffler: "/catalog/muffler.jpg",
+  blanket: "/catalog/blanket.jpg",
+  blanketSingle: "/catalog/blanket-single.jpg",
+  blanketBaby: "/catalog/blanket-baby.jpg",
+  quilt: "/catalog/quilt.jpg",
+  comforter: "/catalog/comforter.jpg",
+  pillow: "/catalog/pillow.jpg",
+  bedsheet: "/catalog/bedsheet.jpg",
+  curtain: "/catalog/curtain.jpg",
+  curtainDoor: "/catalog/curtain-door.jpg",
+  hoodie: "/catalog/hoodie.jpg",
+  cap: "/catalog/cap.jpg",
+  shorts: "/catalog/shorts.jpg",
+  suitcaseS: "/catalog/bag-s.jpg",
+  suitcase: "/catalog/bag-m.jpg",
+  suitcaseXl: "/catalog/bag-xl.jpg",
+  suitcaseHard: "/catalog/suitcase.jpg",
+  handbag: "/catalog/handbag.jpg",
+  towel: "/catalog/towel.jpg",
+  kids: "/catalog/kids.jpg",
+  kidsTee: "/catalog/kids-tee.jpg",
+  kidsSuit: "/catalog/kids-suit.jpg",
+  kidsFrock: "/catalog/kids-frock.jpg",
+  press: "/catalog/shirt.jpg",
+  tie: "/catalog/tie.jpg",
+  dhoti: "/catalog/dhoti.jpg",
+  jute: "/catalog/jute.jpg",
+  juteLarge: "/catalog/jute-large.jpg",
+  raincoat: "/catalog/raincoat.jpg",
+  sofa: "/catalog/sofa.jpg",
+  bathrobe: "/catalog/bathrobe.jpg",
+};
+
+export const SEED_ITEMS: CatalogItem[] = buildItems([
+  // 1. Dry clean — general
+  { id: "g-suit-3", no: 1, category: "dry-gents", sub: "sub-g-suit", nameHi: "कोट + पैंट + बण्डी", nameEn: "Coat + trousers + waistcoat", price: 450, pieces: 3, icon: "suit", image: img.suitTie, days: 3 },
+  { id: "g-suit-2", no: 2, category: "dry-gents", sub: "sub-g-suit", nameHi: "कोट + पैंट", nameEn: "Coat + trousers", price: 325, pieces: 2, icon: "suit", image: img.suit, days: 3 },
+  { id: "g-blazer", no: 3, category: "dry-gents", sub: "sub-g-suit", nameHi: "कोट / ब्लेज़र", nameEn: "Coat / blazer", price: 225, icon: "suit", image: img.blazer, days: 3 },
+  { id: "g-overcoat", no: 4, category: "dry-gents", sub: "sub-g-suit", nameHi: "ओवरकोट / लॉन्ग कोट", nameEn: "Overcoat / long coat", price: 275, icon: "suit", image: img.overcoat, days: 3 },
+  { id: "g-bandi", no: 5, category: "dry-gents", sub: "sub-g-suit", nameHi: "बण्डी", nameEn: "Waistcoat", price: 150, icon: "suit", image: img.bandi },
+  { id: "g-kurta-wool", no: 6, category: "dry-gents", sub: "sub-g-kurta", nameHi: "कुर्ता ऊनी", nameEn: "Wool kurta", price: 105, icon: "shirt", image: img.kurta },
+  { id: "g-kurta-cotton", no: 7, category: "dry-gents", sub: "sub-g-kurta", nameHi: "कुर्ता कॉटन", nameEn: "Cotton kurta", price: 70, icon: "shirt", image: img.kurta },
+  { id: "g-kurta-fancy", no: 8, category: "dry-gents", sub: "sub-g-kurta", nameHi: "कुर्ता फैंसी", nameEn: "Fancy kurta", price: 150, icon: "shirt", image: img.kurtaWork },
+  { id: "g-kurta-silk", no: 9, category: "dry-gents", sub: "sub-g-kurta", nameHi: "कुर्ता मटका / सिल्क", nameEn: "Matka / silk kurta", price: 120, icon: "shirt", image: img.kurtaSilk },
+  { id: "g-pajama-cotton", no: 10, category: "dry-gents", sub: "sub-g-kurta", nameHi: "पायजामा कॉटन", nameEn: "Cotton pyjama", price: 70, icon: "pant", image: img.pajama },
+  { id: "g-pajama-fancy", no: 11, category: "dry-gents", sub: "sub-g-kurta", nameHi: "पायजामा फैंसी", nameEn: "Fancy pyjama", price: 90, icon: "pant", image: img.pajama },
+  { id: "g-full-pant", no: 12, category: "dry-gents", sub: "sub-g-pant", nameHi: "फुल पैंट", nameEn: "Full trousers", price: 65, icon: "pant", image: img.trousers },
+  { id: "g-jeans-pant", no: 13, category: "dry-gents", sub: "sub-g-pant", nameHi: "जीन्स पैंट", nameEn: "Jeans", price: 70, icon: "pant", image: img.jeans },
+  { id: "g-jeans-shirt", no: 14, category: "dry-gents", sub: "sub-g-pant", nameHi: "जीन्स शर्ट", nameEn: "Denim shirt", price: 70, icon: "shirt", image: img.denimShirt },
+  { id: "g-sherwani-set", no: 15, category: "dry-gents", sub: "sub-g-wedding", nameHi: "शेरवानी + पायजामा + दोपट्टा", nameEn: "Sherwani set", price: 525, pieces: 3, icon: "suit", image: img.sherwani, days: 4, featured: true },
+  { id: "g-safari", no: 16, category: "dry-gents", sub: "sub-g-suit", nameHi: "सफारी सूट", nameEn: "Safari suit", price: 185, pieces: 2, icon: "suit", image: img.safari },
+  { id: "g-vest-set", no: 17, category: "dry-gents", sub: "sub-g-suit", nameHi: "वेस्ट सेट", nameEn: "Waistcoat set", price: 450, pieces: 3, icon: "suit", image: img.bandi, days: 3 },
+  { id: "g-vest-long", no: 18, category: "dry-gents", sub: "sub-g-suit", nameHi: "वेस्ट लॉन्ग", nameEn: "Long waistcoat", price: 525, pieces: 2, icon: "suit", image: img.bandi, days: 3 },
+  { id: "g-wool-bandi", no: 19, category: "dry-gents", sub: "sub-g-suit", nameHi: "ऊनी बण्डी", nameEn: "Wool waistcoat", price: 170, icon: "suit", image: img.bandi, days: 3 },
+  { id: "g-dhoti", category: "dry-gents", sub: "sub-g-kurta", no: 20, nameHi: "धोती", nameEn: "Dhoti", price: 80, icon: "saree", image: img.dhoti },
+  { id: "g-shorts", category: "dry-gents", sub: "sub-g-pant", no: 21, nameHi: "शॉर्ट्स", nameEn: "Shorts", price: 70, icon: "pant", image: img.shorts },
+  { id: "g-tie", no: 23, category: "dry-gents", sub: "sub-g-pant", nameHi: "टाई", nameEn: "Tie", price: 30, icon: "shirt", image: img.tie, days: 1 },
+  { id: "g-shirt", no: 24, category: "dry-gents", sub: "sub-g-pant", nameHi: "शर्ट", nameEn: "Shirt", price: 70, icon: "shirt", image: img.shirt },
+
+  // 2. Dry clean — ladies
+  { id: "l-saree-cotton", no: 1, category: "dry-ladies", sub: "sub-l-saree", nameHi: "कॉटन साड़ी", nameEn: "Cotton saree", price: 140, icon: "saree", image: img.sareeCotton, days: 3 },
+  { id: "l-saree-chiffon", no: 2, category: "dry-ladies", sub: "sub-l-saree", nameHi: "शिफॉन साड़ी", nameEn: "Chiffon saree", price: 165, icon: "saree", image: img.sareeChiffon, days: 3 },
+  { id: "l-saree-banarasi", no: 3, category: "dry-ladies", sub: "sub-l-saree", nameHi: "बनारसी साड़ी", nameEn: "Banarasi saree", price: 225, icon: "saree", image: img.sareeBanarasi, days: 3, featured: true },
+  { id: "l-saree-banarasi-work", no: 4, category: "dry-ladies", sub: "sub-l-saree", nameHi: "बनारसी कामदार साड़ी", nameEn: "Worked Banarasi saree", price: 250, icon: "saree", image: img.sareeBanarasi, days: 4 },
+  { id: "l-saree-silk-work", no: 5, category: "dry-ladies", sub: "sub-l-saree", nameHi: "सिल्क साड़ी कामदार", nameEn: "Worked silk saree", price: 170, icon: "saree", image: img.sareeSilk, days: 3 },
+  { id: "l-saree-net", no: 6, category: "dry-ladies", sub: "sub-l-saree", nameHi: "नेट / जरजट साड़ी", nameEn: "Net / georgette saree", price: 185, icon: "saree", image: img.sareeNet, days: 3 },
+  { id: "l-saree-net-work", no: 7, category: "dry-ladies", sub: "sub-l-saree", nameHi: "नेट / जरजट कामदार", nameEn: "Worked net / georgette", price: 200, icon: "saree", image: img.sareeNet, days: 3 },
+  { id: "l-blouse", no: 8, category: "dry-ladies", sub: "sub-l-blouse", nameHi: "ब्लाउज सादा", nameEn: "Plain blouse", price: 40, icon: "shirt", image: img.blouse },
+  { id: "l-blouse-work", no: 9, category: "dry-ladies", sub: "sub-l-blouse", nameHi: "ब्लाउज कामदार", nameEn: "Worked blouse", price: 50, icon: "shirt", image: img.blouseWork },
+  { id: "l-kameez", no: 10, category: "dry-ladies", sub: "sub-l-suit", nameHi: "शमीज़", nameEn: "Kameez", price: 90, icon: "shirt", image: img.salwar },
+  { id: "l-suit-plain", no: 11, category: "dry-ladies", sub: "sub-l-suit", nameHi: "शमीज़ + पायजामा + दोपट्टा सादा", nameEn: "Plain salwar suit", price: 210, pieces: 3, icon: "suit", image: img.salwar, days: 3 },
+  { id: "l-suit-work", no: 12, category: "dry-ladies", sub: "sub-l-suit", nameHi: "शमीज़ + पायजामा + दोपट्टा कामदार", nameEn: "Worked salwar suit", price: 250, pieces: 3, icon: "suit", image: img.salwarWork, days: 3 },
+  { id: "l-skirt-set", no: 13, category: "dry-ladies", sub: "sub-l-frock", nameHi: "स्कर्ट सेट", nameEn: "Skirt set", price: 325, pieces: 3, icon: "lehenga", image: img.skirt, days: 3 },
+  { id: "l-skirt", no: 14, category: "dry-ladies", sub: "sub-l-frock", nameHi: "स्कर्ट", nameEn: "Skirt", price: 205, icon: "lehenga", image: img.skirtWork },
+  { id: "l-lehenga", no: 15, category: "dry-ladies", sub: "sub-l-lehenga", nameHi: "सादा लहंगा", nameEn: "Plain lehenga", price: 350, pieces: 3, icon: "lehenga", image: img.lehenga, days: 4 },
+  { id: "l-lehenga-work", no: 16, category: "dry-ladies", sub: "sub-l-lehenga", nameHi: "कामदार लहंगा", nameEn: "Worked lehenga", price: 675, pieces: 3, icon: "lehenga", image: img.lehengaWork, days: 4, featured: true },
+  { id: "l-bridal-set", no: 17, category: "dry-ladies", sub: "sub-l-lehenga", nameHi: "ब्राइडल लहंगा सेट", nameEn: "Bridal lehenga set", price: 825, pieces: 3, icon: "lehenga", image: img.bridal, days: 5, featured: true },
+  { id: "l-frock", no: 18, category: "dry-ladies", sub: "sub-l-frock", nameHi: "लॉन्ग फ्रॉक साधारण", nameEn: "Long frock", price: 175, icon: "lehenga", image: img.frock },
+  { id: "l-frock-work", no: 19, category: "dry-ladies", sub: "sub-l-frock", nameHi: "लॉन्ग फ्रॉक कामदार", nameEn: "Worked long frock", price: 225, icon: "lehenga", image: img.frockWork, days: 3 },
+  { id: "l-dupatta", no: 20, category: "dry-ladies", sub: "sub-l-dupatta", nameHi: "दोपट्टा साधारण", nameEn: "Plain dupatta", price: 65, icon: "dupatta", image: img.dupatta },
+  { id: "l-dupatta-work", no: 21, category: "dry-ladies", sub: "sub-l-dupatta", nameHi: "दोपट्टा कामदार", nameEn: "Worked dupatta", price: 85, icon: "dupatta", image: img.dupattaWork },
+  { id: "l-bridal-heavy", category: "dry-ladies", sub: "sub-l-lehenga", no: 22, nameHi: "ब्राइडल बहुत भारी", nameEn: "Heavy bridal", price: 1025, pieces: 3, icon: "lehenga", image: img.bridalHeavy, days: 5, featured: true },
+  { id: "l-dhoti", category: "dry-ladies", sub: "sub-l-saree", no: 23, nameHi: "धोती", nameEn: "Dhoti", price: 80, icon: "saree", image: img.dhoti },
+  { id: "l-gown-heavy", no: 24, category: "dry-ladies", sub: "sub-l-lehenga", nameHi: "गाउन बहुत भारी", nameEn: "Heavy gown", price: 405, icon: "lehenga", image: img.gown, days: 4 },
+
+  // 3. Winter
+  { id: "w-jacket-full", no: 1, category: "winter", sub: "sub-w-jacket", nameHi: "जैकेट फुल", nameEn: "Full jacket", price: 220, icon: "suit", image: img.jacket, days: 3 },
+  { id: "w-jacket-half", no: 2, category: "winter", sub: "sub-w-jacket", nameHi: "जैकेट हाफ", nameEn: "Half jacket", price: 180, icon: "suit", image: img.halfJacket, days: 3 },
+  { id: "w-jacket-jeans", no: 3, category: "winter", sub: "sub-w-jacket", nameHi: "जींस जैकेट", nameEn: "Jeans jacket", price: 175, icon: "suit", image: img.jeansJacket, days: 3 },
+  { id: "w-jacket-leather", no: 4, category: "winter", sub: "sub-w-jacket", nameHi: "लेदर जैकेट", nameEn: "Leather jacket", price: 325, icon: "suit", image: img.leather, days: 4 },
+  { id: "w-sweater-half", no: 5, category: "winter", sub: "sub-w-sweater", nameHi: "स्वेटर हाफ", nameEn: "Half sweater", price: 135, icon: "shirt", image: img.sweater, days: 3 },
+  { id: "w-sweater-full", no: 6, category: "winter", sub: "sub-w-sweater", nameHi: "स्वेटर फुल", nameEn: "Full sweater", price: 160, icon: "shirt", image: img.sweater, days: 3 },
+  { id: "w-shawl", no: 7, category: "winter", sub: "sub-w-shawl", nameHi: "शॉल", nameEn: "Shawl", price: 150, icon: "dupatta", image: img.shawl, days: 3 },
+  { id: "w-shawl-kashmir", no: 8, category: "winter", sub: "sub-w-shawl", nameHi: "कश्मीरी शॉल", nameEn: "Kashmiri shawl", price: 170, icon: "dupatta", image: img.shawlKashmir, days: 3 },
+  { id: "w-wool-bedsheet", no: 9, category: "winter", sub: "sub-w-blanket", nameHi: "ऊनी बेडशीट", nameEn: "Wool bedsheet", price: 150, icon: "blanket", image: img.bedsheet, days: 3 },
+  { id: "w-wool-pillow", no: 10, category: "winter", sub: "sub-w-blanket", nameHi: "ऊनी तकिए का कवर", nameEn: "Wool pillow cover", price: 45, icon: "blanket", image: img.pillow },
+  { id: "w-comforter-s", no: 11, category: "winter", sub: "sub-w-blanket", nameHi: "एसी कंफर्टर सिंगल बेड", nameEn: "AC comforter single", price: 250, icon: "blanket", image: img.comforter, days: 3 },
+  { id: "w-comforter-d", no: 12, category: "winter", sub: "sub-w-blanket", nameHi: "एसी कंफर्टर डबल बेड", nameEn: "AC comforter double", price: 300, icon: "blanket", image: img.comforter, days: 3 },
+  { id: "w-blanket-s", no: 13, category: "winter", sub: "sub-w-blanket", nameHi: "कंबल सिंगल बेड", nameEn: "Blanket single", price: 300, icon: "blanket", image: img.blanketSingle, days: 3 },
+  { id: "w-blanket-d", no: 14, category: "winter", sub: "sub-w-blanket", nameHi: "कंबल डबल बेड", nameEn: "Blanket double", price: 400, icon: "blanket", image: img.blanket, days: 4 },
+  { id: "w-quilt-d", no: 15, category: "winter", sub: "sub-w-blanket", nameHi: "कंबल डबल बेड बड़ी / डबल लेयर", nameEn: "Blanket double / two-layer", price: 450, icon: "blanket", image: img.quilt, days: 4 },
+  { id: "w-muffler", no: 16, category: "winter", sub: "sub-w-shawl", nameHi: "मफलर", nameEn: "Muffler", price: 60, icon: "dupatta", image: img.muffler },
+  { id: "w-wool-cap", category: "winter", sub: "sub-w-shawl", no: 17, nameHi: "ऊनी टोपी", nameEn: "Wool cap", price: 60, icon: "shirt", image: img.cap },
+  { id: "w-jacket-cap", category: "winter", sub: "sub-w-jacket", no: 18, nameHi: "जैकेट विद कैप", nameEn: "Jacket with hood", price: 250, icon: "suit", image: img.jacketCap, days: 3 },
+  { id: "w-curtain-window", category: "winter", sub: "sub-w-curtain", no: 19, nameHi: "खिड़की का पर्दा", nameEn: "Window curtain", price: 65, icon: "curtain", image: img.curtain, days: 3 },
+  { id: "w-curtain-door", category: "winter", sub: "sub-w-curtain", no: 20, nameHi: "दरवाजे का पर्दा", nameEn: "Door curtain", price: 90, icon: "curtain", image: img.curtainDoor, days: 3 },
+  { id: "w-hoodie", no: 21, category: "winter", sub: "sub-w-sweater", nameHi: "स्वेट शर्ट विद हुडी", nameEn: "Hoodie", price: 160, icon: "shirt", image: img.hoodie, days: 3 },
+  { id: "w-jacket-large", no: 22, category: "winter", sub: "sub-w-jacket", nameHi: "जैकेट बड़ी साइज", nameEn: "Large jacket", price: 300, icon: "suit", image: img.jacket, days: 3 },
+  { id: "w-blanket-s-layer", no: 23, category: "winter", sub: "sub-w-blanket", nameHi: "कंबल सिंगल बेड / डबल लेयर", nameEn: "Blanket single / two-layer", price: 350, icon: "blanket", image: img.quilt, days: 3 },
+  { id: "w-jacket-dirty", no: 24, category: "winter", sub: "sub-w-jacket", nameHi: "जैकेट बहुत गंदी / डस्टी", nameEn: "Very dirty / dusty jacket", price: 250, icon: "suit", image: img.jacket, days: 4 },
+
+  // 4. Oil wash
+  { id: "o-suit-3", no: 1, category: "oil-wash", sub: "sub-o-men", nameHi: "कोट + पैंट + बण्डी", nameEn: "Coat + trousers + waistcoat", price: 675, pieces: 3, icon: "suit", image: img.suitTie, days: 4 },
+  { id: "o-suit-2", no: 2, category: "oil-wash", sub: "sub-o-men", nameHi: "कोट + पैंट", nameEn: "Coat + trousers", price: 450, pieces: 2, icon: "suit", image: img.suit, days: 4 },
+  { id: "o-coat", no: 3, category: "oil-wash", sub: "sub-o-men", nameHi: "कोट", nameEn: "Coat", price: 350, icon: "suit", image: img.blazer, days: 4 },
+  { id: "o-overcoat", no: 4, category: "oil-wash", sub: "sub-o-men", nameHi: "ओवरकोट", nameEn: "Overcoat", price: 405, icon: "suit", image: img.overcoat, days: 4 },
+  { id: "o-jacket", no: 5, category: "oil-wash", sub: "sub-o-men", nameHi: "जैकेट", nameEn: "Jacket", price: 350, icon: "suit", image: img.jacket, days: 4 },
+  { id: "o-saree-light", no: 6, category: "oil-wash", sub: "sub-o-women", nameHi: "शिफॉन, सिल्क, सिंथेटिक साड़ी", nameEn: "Chiffon / silk / synthetic saree", price: 250, icon: "saree", image: img.sareeSilk, days: 3 },
+  { id: "o-blouse", no: 7, category: "oil-wash", sub: "sub-o-women", nameHi: "ब्लाउज", nameEn: "Blouse", price: 75, icon: "shirt", image: img.blouse, days: 3 },
+  { id: "o-saree-banarasi", no: 8, category: "oil-wash", sub: "sub-o-women", nameHi: "बनारसी साड़ी", nameEn: "Banarasi saree", price: 300, icon: "saree", image: img.sareeBanarasi, days: 4 },
+  { id: "o-wool-shawl", no: 9, category: "oil-wash", sub: "sub-o-women", nameHi: "ऊनी शॉल", nameEn: "Wool shawl", price: 225, icon: "dupatta", image: img.shawl, days: 4 },
+  { id: "o-sherwani-set", no: 10, category: "oil-wash", sub: "sub-o-wedding", nameHi: "शेरवानी सेट", nameEn: "Sherwani set", price: 725, pieces: 3, icon: "suit", image: img.sherwani, days: 4 },
+  { id: "o-sherwani-work", no: 11, category: "oil-wash", sub: "sub-o-wedding", nameHi: "शेरवानी कामदार", nameEn: "Worked sherwani", price: 450, icon: "suit", image: img.sherwani, days: 4 },
+  { id: "o-bridal", no: 12, category: "oil-wash", sub: "sub-o-wedding", nameHi: "ब्राइडल लहंगा", nameEn: "Bridal lehenga", price: 1650, pieces: 3, icon: "lehenga", image: img.bridal, days: 5, featured: true },
+  { id: "o-bridal-heavy", no: 13, category: "oil-wash", sub: "sub-o-wedding", nameHi: "ब्राइडल बहुत भारी", nameEn: "Heavy bridal", price: 2150, pieces: 3, icon: "lehenga", image: img.bridalHeavy, days: 5 },
+  { id: "o-lehenga", no: 14, category: "oil-wash", sub: "sub-o-wedding", nameHi: "लहंगा साधारण", nameEn: "Plain lehenga", price: 750, pieces: 3, icon: "lehenga", image: img.lehenga, days: 4 },
+  { id: "o-lehenga-heavy", no: 15, category: "oil-wash", sub: "sub-o-wedding", nameHi: "लहंगा बहुत भारी", nameEn: "Heavy lehenga", price: 1250, pieces: 3, icon: "lehenga", image: img.lehengaWork, days: 5 },
+  { id: "o-long-coat", no: 16, category: "oil-wash", sub: "sub-o-men", nameHi: "लॉन्ग कोट", nameEn: "Long coat", price: 525, icon: "suit", image: img.overcoat, days: 4 },
+
+  // 5. Other
+  { id: "x-case-s", no: 1, category: "other", sub: "sub-x-case", nameHi: "सूटकेस छोटा", nameEn: "Suitcase small", price: 200, icon: "suit", image: img.suitcaseS, days: 3 },
+  { id: "x-case-m", no: 2, category: "other", sub: "sub-x-case", nameHi: "सूटकेस मीडियम", nameEn: "Suitcase medium", price: 305, icon: "suit", image: img.suitcase, days: 3 },
+  { id: "x-case-l", no: 3, category: "other", sub: "sub-x-case", nameHi: "सूटकेस बड़ा", nameEn: "Suitcase large", price: 415, icon: "suit", image: img.suitcaseXl, days: 3 },
+  { id: "x-case-xl", no: 4, category: "other", sub: "sub-x-case", nameHi: "सूटकेस एक्स्ट्रा लार्ज", nameEn: "Suitcase extra large", price: 525, icon: "suit", image: img.suitcaseHard, days: 3 },
+  { id: "x-jute-l", no: 5, category: "other", sub: "sub-x-bag", nameHi: "जूट कपड़े का हैंडबैग बड़ा", nameEn: "Jute cloth bag large", price: 305, icon: "sofa", image: img.juteLarge, days: 3 },
+  { id: "x-jute-s", no: 6, category: "other", sub: "sub-x-bag", nameHi: "जूट कपड़े का हैंडबैग छोटा", nameEn: "Jute cloth bag small", price: 200, icon: "sofa", image: img.jute },
+  { id: "x-leather-s", no: 7, category: "other", sub: "sub-x-bag", nameHi: "लेदर हैंडबैग छोटा", nameEn: "Leather bag small", price: 275, icon: "sofa", image: img.handbag, days: 3 },
+  { id: "x-leather-l", no: 8, category: "other", sub: "sub-x-bag", nameHi: "लेदर हैंडबैग बड़ा", nameEn: "Leather bag large", price: 425, icon: "sofa", image: img.handbag, days: 3 },
+  { id: "x-raincoat", no: 9, category: "other", sub: "sub-x-bag", nameHi: "रेनकोट", nameEn: "Raincoat", price: 150, icon: "suit", image: img.raincoat },
+  { id: "x-curtain-w", no: 10, category: "other", sub: "sub-x-curtain", nameHi: "खिड़की का पर्दा", nameEn: "Window curtain", price: 65, icon: "curtain", image: img.curtain, days: 3 },
+  { id: "x-curtain-d", no: 11, category: "other", sub: "sub-x-curtain", nameHi: "दरवाजे का पर्दा", nameEn: "Door curtain", price: 90, icon: "curtain", image: img.curtainDoor, days: 3 },
+  { id: "x-curtain-long", no: 12, category: "other", sub: "sub-x-curtain", nameHi: "दरवाजे का पर्दा ज्यादा लंबा", nameEn: "Extra-long door curtain", price: 125, icon: "curtain", image: img.curtainDoor, days: 3 },
+  { id: "x-sheet-s", no: 13, category: "other", sub: "sub-x-bed", nameHi: "बेड शीट सिंगल बेड", nameEn: "Bedsheet single", price: 80, icon: "blanket", image: img.bedsheet, days: 3 },
+  { id: "x-sheet-d", no: 14, category: "other", sub: "sub-x-bed", nameHi: "बेड शीट डबल बेड", nameEn: "Bedsheet double", price: 120, icon: "blanket", image: img.bedsheet, days: 3 },
+  { id: "x-pillow", no: 15, category: "other", sub: "sub-x-bed", nameHi: "तकिए का कवर", nameEn: "Pillow cover", price: 40, icon: "blanket", image: img.pillow },
+  { id: "x-towel-s", no: 16, category: "other", sub: "sub-x-towel", nameHi: "तौलिया छोटा", nameEn: "Towel small", price: 45, icon: "blanket", image: img.towel },
+  { id: "x-towel-m", no: 17, category: "other", sub: "sub-x-towel", nameHi: "तौलिया मीडियम", nameEn: "Towel medium", price: 75, icon: "blanket", image: img.towel },
+  { id: "x-towel-l", no: 18, category: "other", sub: "sub-x-towel", nameHi: "तौलिया बड़ा", nameEn: "Towel large", price: 105, icon: "blanket", image: img.towel },
+  { id: "x-bathrobe", no: 19, category: "other", sub: "sub-x-towel", nameHi: "बाथरोब", nameEn: "Bathrobe", price: 150, icon: "shirt", image: img.bathrobe, days: 3 },
+  { id: "x-sofa", no: 20, category: "other", sub: "sub-x-bed", nameHi: "सोफा कवर", nameEn: "Sofa cover", price: 105, icon: "sofa", image: img.sofa, days: 3 },
+
+  // 6. Kids
+  { id: "k-shirt", no: 1, category: "kids", sub: "sub-k-daily", nameHi: "शर्ट", nameEn: "Shirt", price: 60, icon: "shirt", image: img.shirt },
+  { id: "k-tshirt", no: 2, category: "kids", sub: "sub-k-daily", nameHi: "टी-शर्ट", nameEn: "T-shirt", price: 60, icon: "shirt", image: img.kidsTee },
+  { id: "k-shirt-wool", no: 3, category: "kids", sub: "sub-k-winter", nameHi: "शर्ट ऊनी", nameEn: "Wool shirt", price: 80, icon: "shirt", image: img.sweater },
+  { id: "k-top", no: 4, category: "kids", sub: "sub-k-daily", nameHi: "टॉप साधारण", nameEn: "Plain top", price: 90, icon: "shirt", image: img.blouse },
+  { id: "k-top-work", no: 5, category: "kids", sub: "sub-k-party", nameHi: "टॉप कामदार", nameEn: "Worked top", price: 150, icon: "shirt", image: img.blouseWork },
+  { id: "k-pant", no: 6, category: "kids", sub: "sub-k-daily", nameHi: "पैंट / जींस", nameEn: "Trousers / jeans", price: 60, icon: "pant", image: img.jeans },
+  { id: "k-frock", no: 7, category: "kids", sub: "sub-k-party", nameHi: "फ्रॉक साधारण", nameEn: "Plain frock", price: 85, icon: "lehenga", image: img.kidsFrock },
+  { id: "k-frock-work", no: 8, category: "kids", sub: "sub-k-party", nameHi: "फ्रॉक कामदार", nameEn: "Worked frock", price: 105, icon: "lehenga", image: img.frock },
+  { id: "k-skirt", no: 9, category: "kids", sub: "sub-k-party", nameHi: "स्कर्ट साधारण", nameEn: "Plain skirt", price: 120, icon: "lehenga", image: img.skirt },
+  { id: "k-skirt-set", no: 10, category: "kids", sub: "sub-k-party", nameHi: "स्कर्ट सेट साधारण", nameEn: "Plain skirt set", price: 215, icon: "lehenga", image: img.skirtWork },
+  { id: "k-sherwani", no: 11, category: "kids", sub: "sub-k-party", nameHi: "शेरवानी सेट", nameEn: "Sherwani set", price: 235, icon: "suit", image: img.sherwani, days: 3 },
+  { id: "k-kurta", no: 12, category: "kids", sub: "sub-k-daily", nameHi: "कुर्ता / पायजामा", nameEn: "Kurta / pyjama", price: 60, icon: "shirt", image: img.kurta },
+  { id: "k-lehenga", no: 13, category: "kids", sub: "sub-k-party", nameHi: "लहंगा सेट साधारण", nameEn: "Plain lehenga set", price: 210, icon: "lehenga", image: img.lehenga, days: 3 },
+  { id: "k-lehenga-work", no: 14, category: "kids", sub: "sub-k-party", nameHi: "लहंगा सेट कामदार", nameEn: "Worked lehenga set", price: 285, icon: "lehenga", image: img.lehengaWork, days: 3 },
+  { id: "k-suit-2", no: 15, category: "kids", sub: "sub-k-party", nameHi: "कोट + पैंट", nameEn: "Coat + trousers", price: 225, icon: "suit", image: img.suit, days: 3 },
+  { id: "k-suit-3", no: 16, category: "kids", sub: "sub-k-party", nameHi: "कोट + पैंट + बण्डी", nameEn: "Coat + trousers + waistcoat", price: 305, icon: "suit", image: img.kidsSuit, days: 3 },
+  { id: "k-jacket", no: 17, category: "kids", sub: "sub-k-winter", nameHi: "जैकेट", nameEn: "Jacket", price: 170, icon: "suit", image: img.jacket, days: 3 },
+  { id: "k-blanket", no: 18, category: "kids", sub: "sub-k-winter", nameHi: "बेबी कंबल", nameEn: "Baby blanket", price: 280, icon: "blanket", image: img.blanketBaby, days: 3 },
+
+  // 7. Steam press
+  { id: "p-saree", no: 1, category: "steam-press", nameHi: "साड़ी साधारण", nameEn: "Plain saree", price: 100, icon: "saree", image: img.sareeCotton, days: 1 },
+  { id: "p-saree-work", no: 2, category: "steam-press", nameHi: "साड़ी कामदार", nameEn: "Worked saree", price: 120, icon: "saree", image: img.sareeWork, days: 1 },
+  { id: "p-suit-3", no: 3, category: "steam-press", nameHi: "कोट + पैंट + बण्डी", nameEn: "Coat + trousers + waistcoat", price: 225, pieces: 3, icon: "suit", image: img.suitTie, days: 1 },
+  { id: "p-suit-2", no: 4, category: "steam-press", nameHi: "कोट + पैंट", nameEn: "Coat + trousers", price: 160, pieces: 2, icon: "suit", image: img.suit, days: 1 },
+  { id: "p-shirt-pant", no: 5, category: "steam-press", nameHi: "शर्ट / पैंट / जींस", nameEn: "Shirt / trousers / jeans", price: 30, icon: "iron", image: img.press, days: 1 },
+  { id: "p-jacket", no: 6, category: "steam-press", nameHi: "जैकेट", nameEn: "Jacket", price: 105, icon: "suit", image: img.jacket, days: 1 },
+  { id: "p-lehenga", no: 7, category: "steam-press", nameHi: "लहंगा सेट", nameEn: "Lehenga set", price: 190, pieces: 3, icon: "lehenga", image: img.lehenga, days: 1 },
+  { id: "p-bridal", no: 8, category: "steam-press", nameHi: "ब्राइडल लहंगा", nameEn: "Bridal lehenga", price: 405, pieces: 3, icon: "lehenga", image: img.bridal, days: 1 },
+  { id: "p-bandi", no: 9, category: "steam-press", nameHi: "बण्डी", nameEn: "Waistcoat", price: 75, icon: "suit", image: img.bandi, days: 1 },
+  { id: "p-kurta-wool", no: 10, category: "steam-press", nameHi: "ऊनी कुर्ता", nameEn: "Wool kurta", price: 60, icon: "shirt", image: img.kurta, days: 1 },
+  { id: "p-overcoat", no: 11, category: "steam-press", nameHi: "ओवरकोट", nameEn: "Overcoat", price: 125, icon: "suit", image: img.overcoat, days: 1 },
+  { id: "p-shawl", no: 12, category: "steam-press", nameHi: "शॉल", nameEn: "Shawl", price: 70, icon: "dupatta", image: img.shawl, days: 1 },
+  { id: "p-blouse", no: 13, category: "steam-press", nameHi: "ब्लाउज", nameEn: "Blouse", price: 25, icon: "shirt", image: img.blouse, days: 1 },
+  { id: "p-ladies-suit", no: 14, category: "steam-press", nameHi: "लेडीज सूट", nameEn: "Ladies suit", price: 120, pieces: 3, icon: "suit", image: img.salwar, days: 1 },
+  { id: "p-lehenga-work", no: 15, category: "steam-press", nameHi: "लहंगा कामदार", nameEn: "Worked lehenga", price: 275, pieces: 3, icon: "lehenga", image: img.lehengaWork, days: 1 },
+  { id: "p-sherwani", no: 16, category: "steam-press", nameHi: "शेरवानी", nameEn: "Sherwani", price: 150, icon: "suit", image: img.sherwani, days: 1 },
+  { id: "p-sherwani-set", no: 17, category: "steam-press", nameHi: "शेरवानी सेट कामदार", nameEn: "Worked sherwani set", price: 280, pieces: 3, icon: "suit", image: img.sherwani, days: 1 },
+  { id: "p-ladies-suit-work", no: 18, category: "steam-press", nameHi: "लेडीज सूट कामदार", nameEn: "Worked ladies suit", price: 150, pieces: 3, icon: "suit", image: img.salwarWork, days: 1 },
+]);

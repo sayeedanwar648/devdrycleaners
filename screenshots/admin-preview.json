@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/admin",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "दर सूची · Dev Dry Cleaners",
+      "hasCanvas": false,
+      "bodyTextLen": 4601,
+      "bodyTextHash": "f95cc2e19f48b5ec9d8896391474264c8fa1f9d61ee0cba5aa02a302f5aee0b0",
+      "bodyTextPrefix": "दर सूची हिं EN साइट पर जाएँ कीमत, कपड़े का नाम, श्रेणी और दिन यह",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/admin-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "दर सूची · Dev Dry Cleaners",
+      "hasCanvas": false,
+      "bodyTextLen": 4601,
+      "bodyTextHash": "f95cc2e19f48b5ec9d8896391474264c8fa1f9d61ee0cba5aa02a302f5aee0b0",
+      "bodyTextPrefix": "दर सूची हिं EN साइट पर जाएँ कीमत, कपड़े का नाम, श्रेणी और दिन यह",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/admin-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/admin-preview.json"
+}
